@@ -14,6 +14,11 @@ namespace TicTacToeWPF.Common
         /// <returns></returns>
         public static bool CheckWin(List<Block> blocks)
         {
+            if (blocks == null || blocks.Count != 9)
+            {
+                return false;
+            }
+
             int[,] winningBlockCombinations = new int[,]
             {
                 { 0, 1, 2 },
@@ -53,6 +58,10 @@ namespace TicTacToeWPF.Common
         /// <returns></returns>
         public static bool CheckTie(List<Block> blocks)
         {
+            if (blocks == null || blocks.Count != 9)
+            {
+                return false;
+            }
             return !blocks.Any(t => string.IsNullOrEmpty(t.PlayerIcon));
         }
     }
