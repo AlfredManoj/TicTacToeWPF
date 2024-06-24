@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TicTacToeWPF
+﻿namespace TicTacToeWPF
 {
     public class MainWindowViewModel
     {
         public MainWindowViewModel()
         {
-            
+        }
+
+        public void StartNewGame()
+        {
+        }
+
+        public void ResetStatistics()
+        {
         }
     }
 }
