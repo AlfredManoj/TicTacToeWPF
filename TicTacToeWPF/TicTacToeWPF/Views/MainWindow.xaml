@@ -100,17 +100,17 @@
                 <Rectangle Grid.Column="0" Grid.RowSpan="3" Width="1" HorizontalAlignment="Right" Fill="{StaticResource MahApps.Brushes.Accent}"/>
                 <Rectangle Grid.Column="1" Grid.RowSpan="3" Width="1" HorizontalAlignment="Right" Fill="{StaticResource MahApps.Brushes.Accent}"/>
                 <!--Row0-->
-                <Button Grid.Row="0" DataContext="{Binding PlayingBlocks[0]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="0" Style="{StaticResource TicTacButton}"/>
-                <Button Grid.Row="0" DataContext="{Binding PlayingBlocks[1]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="1" Style="{StaticResource TicTacButton}"/>
-                <Button Grid.Row="0" DataContext="{Binding PlayingBlocks[2]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="2" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="0" DataContext="{Binding PlayingBlocks[0]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="0" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="0" DataContext="{Binding PlayingBlocks[1]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="1" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="0" DataContext="{Binding PlayingBlocks[2]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="2" Style="{StaticResource TicTacButton}"/>
                 <!--Row1-->
-                <Button Grid.Row="1" DataContext="{Binding PlayingBlocks[3]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="0" Style="{StaticResource TicTacButton}"/>
-                <Button Grid.Row="1" DataContext="{Binding PlayingBlocks[4]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="1" Style="{StaticResource TicTacButton}"/>
-                <Button Grid.Row="1" DataContext="{Binding PlayingBlocks[5]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="2" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="1" DataContext="{Binding PlayingBlocks[3]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="0" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="1" DataContext="{Binding PlayingBlocks[4]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="1" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="1" DataContext="{Binding PlayingBlocks[5]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="2" Style="{StaticResource TicTacButton}"/>
                 <!--Row2-->
-                <Button Grid.Row="2" DataContext="{Binding PlayingBlocks[6]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="0" Style="{StaticResource TicTacButton}"/>
-                <Button Grid.Row="2" DataContext="{Binding PlayingBlocks[7]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="1" Style="{StaticResource TicTacButton}"/>
-                <Button Grid.Row="2" DataContext="{Binding PlayingBlocks[8]}" cal:Message.Attach="[Event Click] = [Action MarkBlock()]" Grid.Column="2" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="2" DataContext="{Binding PlayingBlocks[6]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="0" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="2" DataContext="{Binding PlayingBlocks[7]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="1" Style="{StaticResource TicTacButton}"/>
+                <Button Grid.Row="2" DataContext="{Binding PlayingBlocks[8]}" cal:Message.Attach="[Event Click] = [Action MarkBlock($dataContext)]" cal:Bind.ModelWithoutContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="2" Style="{StaticResource TicTacButton}"/>
             </Grid>
             <Grid Margin="10 30 10 30" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -171,6 +171,11 @@
                 <Label Content="{Binding TieCount}" Grid.Row="3" Grid.Column="2" Foreground="Green" FontSize="40" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0 0 25 4" />
                 <Label Content="TIES" Grid.Row="3" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" />
             </Grid>
+            <mah:FlyoutsControl Grid.Column="0" Grid.ColumnSpan="2">
+                <mah:Flyout AutoCloseInterval="1000" Header="" Height="60" Background="{StaticResource MahApps.Brushes.Accent}" IsAutoCloseEnabled="True" IsOpen="{Binding IsMessageShown}" Position="Bottom" CloseButtonVisibility="Collapsed">
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="{Binding MessageText}"/>
+                </mah:Flyout>
+            </mah:FlyoutsControl>
         </Grid>
     </DockPanel>
 </mah:MetroWindow>

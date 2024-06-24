@@ -24,10 +24,5 @@ namespace TicTacToeWPF.Models
             get => isWinningBlock;
             set => Set(ref isWinningBlock, value);
         }
-
-        public void MarkBlock()
-        {
-            PlayerIcon = Players.X.ToString();
-        }
     }
 }
