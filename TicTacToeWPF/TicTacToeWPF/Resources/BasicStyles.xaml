@@ -48,6 +48,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsHitTestVisible" Value="{Binding IsBlockEnabled}"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsWinningBlock}" Value="True">
                 <Setter Property="Background" Value="Green"/>

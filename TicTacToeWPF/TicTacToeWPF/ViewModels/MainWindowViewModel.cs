@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using System.Windows;
 using TicTacToeWPF.Common;
 using TicTacToeWPF.Models;
 
@@ -16,6 +17,7 @@ namespace TicTacToeWPF
         private int tieCount;
         private Players currentPlayer;
         private List<Block> playingBlocks;
+        private bool isGameInProgress;
 
         /// <summary>
         /// constructor
@@ -43,6 +45,12 @@ namespace TicTacToeWPF
         {
             get => isMessageShown;
             set => Set(ref isMessageShown, value);
+        }
+
+        public bool IsGameInProgress
+        {
+            get => isGameInProgress;
+            set => Set(ref isGameInProgress, value);
         }
 
         public int PlayerXWinCount
@@ -80,12 +88,14 @@ namespace TicTacToeWPF
         {
             if (block is Block playedBlock)
             {
+                IsGameInProgress = true;
                 if (!string.IsNullOrEmpty(playedBlock.PlayerIcon))
                 {
                     MessageText = Constants.InvalidMove;
                     return;
                 }
                 playedBlock.PlayerIcon = CurrentPlayer.ToString();
+                CalculateGameStatus();
                 ChangeCurrentPlayer();
             }
         }
@@ -95,11 +105,25 @@ namespace TicTacToeWPF
         /// </summary>
         public void StartNewGame()
         {
+            if (IsGameInProgress)
+            {
+                var result = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageText = "Game abandoned";
+                }
+            }
             PlayingBlocks.ForEach(block =>
             {
                 block.PlayerIcon = string.Empty;
                 block.IsWinningBlock = false;
+                block.IsBlockEnabled = true;
             });
+            IsGameInProgress = false;
         }
 
         /// <summary>
@@ -108,6 +132,32 @@ namespace TicTacToeWPF
         public void ResetStatistics()
         {
             PlayerOWinCount = PlayerXWinCount = TieCount = 0;
+        }
+
+        private void CalculateGameStatus()
+        {
+            if (GameStatusChecker.CheckWin(PlayingBlocks))
+            {
+                PlayingBlocks.ForEach(block => block.IsBlockEnabled = false);
+                if (CurrentPlayer == Players.X)
+                {
+                    PlayerXWinCount++;
+                    MessageText = Constants.PlayerXWin;
+                }
+                else
+                {
+                    PlayerOWinCount++;
+                    MessageText = Constants.PlayerOWin;
+                }
+                IsGameInProgress = false;
+            }
+            else if (GameStatusChecker.CheckTie(PlayingBlocks))
+            {
+                PlayingBlocks.ForEach(block => block.IsBlockEnabled = false);
+                TieCount++;
+                MessageText = Constants.Tie;
+                IsGameInProgress = false;
+            }
         }
 
         private void AddPlayingBlocks()

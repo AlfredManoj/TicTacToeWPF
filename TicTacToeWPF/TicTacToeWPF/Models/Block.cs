@@ -12,6 +12,7 @@ namespace TicTacToeWPF.Models
     {
         private string? playerIcon;
         private bool isWinningBlock;
+        private bool isBlockEnabled = true;
 
         public int Id { get; set; }
         public string? PlayerIcon
@@ -23,6 +24,11 @@ namespace TicTacToeWPF.Models
         {
             get => isWinningBlock;
             set => Set(ref isWinningBlock, value);
+        }
+        public bool IsBlockEnabled
+        {
+            get => isBlockEnabled;
+            set => Set(ref isBlockEnabled, value);
         }
     }
 }
