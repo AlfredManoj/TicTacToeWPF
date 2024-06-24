@@ -81,6 +81,7 @@ namespace TicTacToeWPF
                 {
                     IsMessageShown = true;
                 }
+                LogReporter.LogInfo(value);
             }
         }
 
@@ -124,6 +125,7 @@ namespace TicTacToeWPF
                 block.IsBlockEnabled = true;
             });
             IsGameInProgress = false;
+            LogReporter.LogInfo("New game started");
         }
 
         /// <summary>
@@ -132,6 +134,7 @@ namespace TicTacToeWPF
         public void ResetStatistics()
         {
             PlayerOWinCount = PlayerXWinCount = TieCount = 0;
+            LogReporter.LogInfo("Game statistics reset");
         }
 
         private void CalculateGameStatus()
