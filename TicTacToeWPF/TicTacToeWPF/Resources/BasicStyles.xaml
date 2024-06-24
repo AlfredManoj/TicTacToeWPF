@@ -41,4 +41,29 @@
             <Path Data="M8 9.414L3.707 13.707 2.293 12.293 6.586 8 2.293 3.707 3.707 2.293 8 6.586 12.293 2.293 13.707 3.707 9.414 8 13.707 12.293 12.293 13.707 8 9.414z" Fill="Black" />
         </Grid>
     </Viewbox>
+    <Style x:Key="TicTacButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+        <Setter Property="Height" Value="78"/>
+        <Setter Property="Width" Value="78"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsWinningBlock}" Value="True">
+                <Setter Property="Background" Value="Green"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PlayerIcon}" Value="X">
+                <Setter Property="Content" Value="{StaticResource XPlayerIcon}"/>
+                <Setter Property="Padding" Value="0 0 10 7"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PlayerIcon}" Value="O">
+                <Setter Property="Content" Value="{StaticResource OPlayerIcon}"/>
+                <Setter Property="Padding" Value="3 2 8 5"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding PlayerIcon}" Value="{x:Null}">
+                <Setter Property="Content" Value=""/>
+                <Setter Property="Padding" Value="0"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
