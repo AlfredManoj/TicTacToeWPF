@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/TicTacToeWPF/.vs/TicTacToeWPF
+/TicTacToeWPF/TicTacToeWPF/obj
+/TicTacToeWPF/TicTacToeWPF/bin/Debug/net6.0-windows
