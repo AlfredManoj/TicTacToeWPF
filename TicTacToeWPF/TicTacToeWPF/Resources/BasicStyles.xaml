@@ -41,6 +41,12 @@
             <Path Data="M8 9.414L3.707 13.707 2.293 12.293 6.586 8 2.293 3.707 3.707 2.293 8 6.586 12.293 2.293 13.707 3.707 9.414 8 13.707 12.293 12.293 13.707 8 9.414z" Fill="Black" />
         </Grid>
     </Viewbox>
+    <Viewbox x:Key="HistoryIcon">
+        <Canvas Width="24" Height="24">
+            <Path Data="M0 0L24 0 24 24 0 24z"/>
+            <Path Data="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-1.702 0-3.305-.425-4.708-1.175L2 22l1.176-5.29C2.426 15.306 2 13.703 2 12 2 6.477 6.477 2 12 2zm1 5h-2v7h6v-2h-4V7z" Fill="#303C42"/>
+        </Canvas>
+    </Viewbox>
     <Style x:Key="TicTacButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
         <Setter Property="Height" Value="78"/>
         <Setter Property="Width" Value="78"/>

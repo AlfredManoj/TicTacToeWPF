@@ -2,6 +2,7 @@
 using System.Windows;
 using TicTacToeWPF.Common;
 using TicTacToeWPF.Models;
+using TicTacToeWPF.Views;
 
 namespace TicTacToeWPF
 {
@@ -15,6 +16,7 @@ namespace TicTacToeWPF
         private int playerXWinCount;
         private int playerOWinCount;
         private int tieCount;
+        private HistoryData historyData;
         private Players currentPlayer;
         private List<Block> playingBlocks;
         private bool isGameInProgress;
@@ -27,7 +29,10 @@ namespace TicTacToeWPF
             CurrentPlayer = Players.X;
             PlayingBlocks = new List<Block>();
             AddPlayingBlocks();
+            historyData = HistoryDataHelper.Load();
         }
+
+        public HistoryData HistoryData { get { return historyData; } }
 
         public Players CurrentPlayer
         {
@@ -137,6 +142,14 @@ namespace TicTacToeWPF
             LogReporter.LogInfo("Game statistics reset");
         }
 
+        public void ShowHistory()
+        {
+            var historyWindow = new History();
+            historyWindow.DataContext = this;
+            historyWindow.ShowActivated = true;
+            historyWindow.ShowDialog();
+        }
+
         private void CalculateGameStatus()
         {
             if (GameStatusChecker.CheckWin(PlayingBlocks))
@@ -145,11 +158,13 @@ namespace TicTacToeWPF
                 if (CurrentPlayer == Players.X)
                 {
                     PlayerXWinCount++;
+                    historyData.WinsX++;
                     MessageText = Constants.PlayerXWin;
                 }
                 else
                 {
                     PlayerOWinCount++;
+                    historyData.WinsO++;
                     MessageText = Constants.PlayerOWin;
                 }
                 IsGameInProgress = false;
@@ -158,8 +173,13 @@ namespace TicTacToeWPF
             {
                 PlayingBlocks.ForEach(block => block.IsBlockEnabled = false);
                 TieCount++;
+                historyData.Ties++;
                 MessageText = Constants.Tie;
                 IsGameInProgress = false;
+            }
+            if (!IsGameInProgress)
+            {
+                HistoryDataHelper.Save(historyData);
             }
         }
 

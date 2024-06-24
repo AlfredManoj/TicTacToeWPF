@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Images\launch_screen.jpg" />
     <None Remove="Images\tictactoe_icon.ico" />
+    <None Remove="Images\tieIcon.png" />
     <None Remove="log4net.config" />
   </ItemGroup>
 
@@ -18,10 +19,14 @@
     <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
     <PackageReference Include="log4net" Version="2.0.17" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Images\tictactoe_icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\tieIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="log4net.config">
