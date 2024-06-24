@@ -26,10 +26,17 @@ namespace TicTacToeWPF
         /// </summary>
         public MainWindowViewModel()
         {
-            CurrentPlayer = Players.X;
-            PlayingBlocks = new List<Block>();
-            AddPlayingBlocks();
-            historyData = HistoryDataHelper.Load();
+            try
+            {
+                CurrentPlayer = Players.X;
+                PlayingBlocks = new List<Block>();
+                AddPlayingBlocks();
+                historyData = HistoryDataHelper.Load();
+            }
+            catch (Exception ex)
+            {
+                LogReporter.LogError(ex.Message);
+            }
         }
 
         #region Public Properties
@@ -128,17 +135,24 @@ namespace TicTacToeWPF
         /// <param name="block"></param>
         public void MarkBlock(object block)
         {
-            if (block is Block playedBlock)
+            try
             {
-                IsGameInProgress = true;
-                if (!string.IsNullOrEmpty(playedBlock.PlayerIcon))
+                if (block is Block playedBlock)
                 {
-                    MessageText = Constants.InvalidMove;
-                    return;
+                    IsGameInProgress = true;
+                    if (!string.IsNullOrEmpty(playedBlock.PlayerIcon))
+                    {
+                        MessageText = Constants.InvalidMove;
+                        return;
+                    }
+                    playedBlock.PlayerIcon = CurrentPlayer.ToString();
+                    CalculateGameStatus();
+                    ChangeCurrentPlayer();
                 }
-                playedBlock.PlayerIcon = CurrentPlayer.ToString();
-                CalculateGameStatus();
-                ChangeCurrentPlayer();
+            }
+            catch (Exception ex)
+            {
+                LogReporter.LogError(ex.Message);
             }
         }
 
@@ -147,26 +161,34 @@ namespace TicTacToeWPF
         /// </summary>
         public void StartNewGame()
         {
-            if (IsGameInProgress)
+            try
             {
-                var result = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.No)
+                if (IsGameInProgress)
                 {
-                    return;
+                    var result = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        LogReporter.LogWarn("Game abandoned");
+                        MessageText = "Game abandoned";
+                    }
                 }
-                else
+                PlayingBlocks.ForEach(block =>
                 {
-                    MessageText = "Game abandoned";
-                }
+                    block.PlayerIcon = string.Empty;
+                    block.IsWinningBlock = false;
+                    block.IsBlockEnabled = true;
+                });
+                IsGameInProgress = false;
+                LogReporter.LogInfo("New game started");
             }
-            PlayingBlocks.ForEach(block =>
+            catch (Exception ex)
             {
-                block.PlayerIcon = string.Empty;
-                block.IsWinningBlock = false;
-                block.IsBlockEnabled = true;
-            });
-            IsGameInProgress = false;
-            LogReporter.LogInfo("New game started");
+                LogReporter.LogError(ex.Message);
+            }
         }
 
         /// <summary>
@@ -174,8 +196,15 @@ namespace TicTacToeWPF
         /// </summary>
         public void ResetStatistics()
         {
-            PlayerOWinCount = PlayerXWinCount = TieCount = 0;
-            LogReporter.LogInfo("Game statistics reset");
+            try
+            {
+                PlayerOWinCount = PlayerXWinCount = TieCount = 0;
+                LogReporter.LogInfo("Game statistics reset");
+            }
+            catch (Exception ex)
+            {
+                LogReporter.LogError(ex.Message);
+            }
         }
 
         /// <summary>
@@ -183,10 +212,17 @@ namespace TicTacToeWPF
         /// </summary>
         public void ShowHistory()
         {
-            var historyWindow = new History();
-            historyWindow.DataContext = this;
-            historyWindow.ShowActivated = true;
-            historyWindow.ShowDialog();
+            try
+            {
+                var historyWindow = new History();
+                historyWindow.DataContext = this;
+                historyWindow.ShowActivated = true;
+                historyWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                LogReporter.LogError(ex.Message);
+            }
         }
 
         /// <summary>
