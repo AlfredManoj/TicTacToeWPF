@@ -4,10 +4,17 @@ using TicTacToeWPF.Models;
 
 namespace TicTacToeWPF.Common
 {
+    /// <summary>
+    /// Helper class for persistent history
+    /// </summary>
     public class HistoryDataHelper
     {
         private static readonly string filePath = Path.Combine("C:\\ProgramData", "TicTacToe", "game_stats.json");
 
+        /// <summary>
+        /// Loads the history
+        /// </summary>
+        /// <returns></returns>
         public static HistoryData Load()
         {
             if (!File.Exists(filePath))
@@ -20,6 +27,10 @@ namespace TicTacToeWPF.Common
             return data ?? new HistoryData();
         }
 
+        /// <summary>
+        /// Saves history data
+        /// </summary>
+        /// <param name="currentStatistics"></param>
         public static void Save(HistoryData currentStatistics)
         {
             var directory = Path.GetDirectoryName(filePath);

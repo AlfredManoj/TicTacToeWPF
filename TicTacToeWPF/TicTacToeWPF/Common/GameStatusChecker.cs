@@ -2,8 +2,16 @@
 
 namespace TicTacToeWPF.Common
 {
+    /// <summary>
+    /// Logic for game win status
+    /// </summary>
     public class GameStatusChecker
     {
+        /// <summary>
+        /// Calculates if any player is won
+        /// </summary>
+        /// <param name="blocks"></param>
+        /// <returns></returns>
         public static bool CheckWin(List<Block> blocks)
         {
             int[,] winningBlockCombinations = new int[,]
@@ -38,6 +46,11 @@ namespace TicTacToeWPF.Common
             return false;
         }
 
+        /// <summary>
+        /// Logic to check for tie
+        /// </summary>
+        /// <param name="blocks"></param>
+        /// <returns></returns>
         public static bool CheckTie(List<Block> blocks)
         {
             return !blocks.Any(t => string.IsNullOrEmpty(t.PlayerIcon));

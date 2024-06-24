@@ -77,7 +77,14 @@
             <Separator BorderBrush="White" BorderThickness="1.5"/>
             <Button Style="{DynamicResource SquareButtonStyle}" Content="{StaticResource NewIcon}" cal:Message.Attach="[Event Click] = [Action StartNewGame()]" ToolTip="Click here to start a new game"/>
             <Separator BorderBrush="White" BorderThickness="1.5"/>
-            <Button Style="{DynamicResource SquareButtonStyle}" Content="{StaticResource ResetIcon}" cal:Message.Attach="[Event Click] = [Action ResetStatistics()]" ToolTip="Click here to reset the statistics"/>
+            <Button Style="{DynamicResource SquareButtonStyle}" Content="{StaticResource ResetIcon}" cal:Message.Attach="[Event Click] = [Action ResetStatistics()]">
+                <Button.ToolTip>
+                    <TextBlock>
+                        Click here to reset the current instance statistics<LineBreak/>
+                        Note: This will have no effect on historical data
+                    </TextBlock>
+                </Button.ToolTip>
+            </Button>
             <Separator BorderBrush="White" BorderThickness="1.5"/>
             <Button Style="{DynamicResource SquareButtonStyle}" Content="{StaticResource HistoryIcon}" cal:Message.Attach="[Event Click] = [Action ShowHistory()]" ToolTip="Click here to see the historical wins"/>
             <Separator BorderBrush="White" BorderThickness="1.5"/>

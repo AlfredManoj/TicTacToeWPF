@@ -1,5 +1,8 @@
 ﻿namespace TicTacToeWPF.Common
 {
+    /// <summary>
+    /// Constants used in the application
+    /// </summary>
     public class Constants
     {
         public static readonly string XPlayer = "X";

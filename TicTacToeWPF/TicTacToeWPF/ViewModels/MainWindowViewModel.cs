@@ -32,50 +32,80 @@ namespace TicTacToeWPF
             historyData = HistoryDataHelper.Load();
         }
 
-        public HistoryData HistoryData { get { return historyData; } }
+        #region Public Properties
 
+        /// <summary>
+        /// Holds historical data
+        /// </summary>
+        public HistoryData HistoryData
+        { get { return historyData; } }
+
+        /// <summary>
+        /// Determines the current player 
+        /// </summary>
         public Players CurrentPlayer
         {
             get => currentPlayer;
             set => Set(ref currentPlayer, value);
         }
 
+        /// <summary>
+        /// Holds information for each playing block
+        /// </summary>
         public List<Block> PlayingBlocks
         {
             get => playingBlocks;
             set => Set(ref playingBlocks, value);
         }
 
+        /// <summary>
+        /// Determines if there is some message to be shown to user
+        /// </summary>
         public bool IsMessageShown
         {
             get => isMessageShown;
             set => Set(ref isMessageShown, value);
         }
 
+        /// <summary>
+        /// Is a game is in progress
+        /// </summary>
         public bool IsGameInProgress
         {
             get => isGameInProgress;
             set => Set(ref isGameInProgress, value);
         }
 
+        /// <summary>
+        /// No of times player X has won in the current instance
+        /// </summary>
         public int PlayerXWinCount
         {
             get => playerXWinCount;
             set => Set(ref playerXWinCount, value);
         }
 
+        /// <summary>
+        /// No of times player O has won in the current instance
+        /// </summary>
         public int PlayerOWinCount
         {
             get => playerOWinCount;
             set => Set(ref playerOWinCount, value);
         }
 
+        /// <summary>
+        /// No of times there is a tie in the current instance
+        /// </summary>
         public int TieCount
         {
             get => tieCount;
             set => Set(ref tieCount, value);
         }
 
+        /// <summary>
+        /// Message to be shown to the user
+        /// </summary>
         public string MessageText
         {
             get => messageText;
@@ -90,6 +120,12 @@ namespace TicTacToeWPF
             }
         }
 
+        #endregion Public Properties
+
+        /// <summary>
+        /// Marks the played block
+        /// </summary>
+        /// <param name="block"></param>
         public void MarkBlock(object block)
         {
             if (block is Block playedBlock)
@@ -142,6 +178,9 @@ namespace TicTacToeWPF
             LogReporter.LogInfo("Game statistics reset");
         }
 
+        /// <summary>
+        /// Shows the history window
+        /// </summary>
         public void ShowHistory()
         {
             var historyWindow = new History();
@@ -150,6 +189,9 @@ namespace TicTacToeWPF
             historyWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// Calculates the current game status after each move
+        /// </summary>
         private void CalculateGameStatus()
         {
             if (GameStatusChecker.CheckWin(PlayingBlocks))
@@ -183,6 +225,9 @@ namespace TicTacToeWPF
             }
         }
 
+        /// <summary>
+        /// Add playing blocks to the game
+        /// </summary>
         private void AddPlayingBlocks()
         {
             for (int blockId = 0; blockId < 9; blockId++)
@@ -191,6 +236,9 @@ namespace TicTacToeWPF
             }
         }
 
+        /// <summary>
+        /// Changes the current player
+        /// </summary>
         private void ChangeCurrentPlayer()
         {
             CurrentPlayer = CurrentPlayer == Players.X ? Players.O : Players.X;
